@@ -76,13 +76,14 @@
             }
         ]
     },
-    "long_request" : {
-        "title" : "Long request",
+    "long_requests" : {
+        "title" : "Long requests",
         "description" : "",
         "multiline" : true,
+        "file-pattern" : ".*longRequests.*",
         "regex" : {
             "cplace" : {
-                "pattern" : "^(?<timestamp>\\d{4}-\\d{2}-\\d{2}\\s\\d{2}:\\d{2}:\\d{2},\\d{3})\\s\\[(?<thread>[^\\]]*)\\]\\sC:(?<correlation_id>[a-z0-9]*)\\s(?<cp_level>[A-Z]*\\s?)\\s?T:(?<tenant>[^\\s]*)\\s?-\\s[^\\:]*:\\s(?<duration>\\d*)[^\\d]*(?<cpu>[^\\s]*)[^\\/]*(?<handler>[^\\s]*)"
+                "pattern" : "^(?<timestamp>\\d{4}-\\d{2}-\\d{2}\\s\\d{2}:\\d{2}:\\d{2},\\d{3})\\s\\[(?<thread>[^\\]]*)\\]\\sC:(?<correlation_id>[a-z0-9]*)\\s(?<cp_level>[A-Z]*\\s?)\\s?T:(?<tenant>[^\\s]*)\\s?-\\s[^\\:]*:\\s(?<duration>\\d*)[^\\d]*(?<cpu>[^\\s]*)[^\\/]*(?<handler>[^\\s]*)[^\\n]*(\\n(?<header>(.*\\n(?<name>[^\\s]*)\\s[^\\d]*(?<hits>\\d*)\\s*(?<total>[^\\s]*)\\s*(?<average>[^\\s]*)\\s*(?<max>[^\\s]*)\\n?)*))?"
             }
         },
         "level-field" : "duration",
@@ -123,11 +124,35 @@
             "handler" : {
                 "kind" : "string",
                 "identifier" : true
+            },
+            "rest" : {
+                "kind" : "string",
+                "identifier" : false
+            },
+            "name" : {
+                "kind" : "string",
+                "identifier" : false
+            },
+            "hits" : {
+                "kind" : "integer",
+                "identifier" : false
+            },
+            "total" : {
+                "kind" : "string",
+                "identifier" : false
+            },
+            "average" : {
+                "kind" : "string",
+                "identifier" : false
+            },
+            "max" : {
+                "kind" : "string",
+                "identifier" : false
             }
         },
         "sample" : [
             {
-                "line" : "2019-11-20 03:55:16,458 [https-jsse-nio-8443-exec-143] C:jhdnpd2h6tto2r24qcpev6nrd T: - ------ long taking request: 1503 ms (cpu 5.816812 ms) for /cplace/a",
+                "line" : "2019-11-20 03:55:16,458 [https-jsse-nio-8443-exec-143] C:kadfh3asdfjadsfjh3adsh343 T: - ------ long taking request: 1503 ms (cpu 5.816812 ms) for /cplace/a",
                 "level" : "info"
             }
         ]
@@ -306,5 +331,59 @@
                 "level" : "warning"
             }
         ]
-    }
+    },
+"rabbitmq": {
+"title": "RabbitMQ Log",
+"description": "RabbitMQ Log",
+"url": "",
+"multiline": true,
+"regex": {
+"connection": {
+"pattern" : "^=(?<level>[A-Z]+) REPORT==== (?<timestamp>\\d\\d?-\\w{3}-\\d{4}::\\d{2}:\\d{2}:\\d{2}) ===(\\n(?<body>(closing AMQP connection <(?<stuff>.+)> \\((?<sourceIP>\\d[\\d.]+\\d?):(?<sourcePort>\\d+) -> (?<destIP>\\d[\\d.]+\\d?):(?<destPort>\\d+)\\))?(.*\\n)*))?$"
+}
+},
+"timestamp-format" : ["%e-%b-%Y::%H:%M:%S"],
+"level": {
+"error": "ERROR",
+"warning": "WARNING|SUPERVISOR",
+"info": "INFO|PROGRESS",
+"fatal": "CRASH"
+},
+"value" : {
+"body" : {
+"kind" : "string",
+"identifier" : true
+},
+"sourceIP" : {
+"kind" : "string",
+"identifier" : true,
+"collate" : "ipaddress"
+},
+"sourcePort" : {
+"kind" : "integer",
+"identifier" : true
+},
+"destIP" : {
+"kind" : "string",
+"identifier" : true,
+"collate" : "ipaddress"
+},
+"destPort" : {
+"kind" : "integer",
+"identifier" : true
+}
+},
+"json": false,
+"sample": [
+{
+"line": "=ERROR REPORT==== 21-Apr-2016::21:19:01 ===\n** Node 'rabbit@red-hound-01' not responding **\n** Removing (timedout) connection **\n\n"
+},
+{
+"line": "=INFO REPORT==== 21-Apr-2016::21:19:01 ===\nrabbit on node 'rabbit@red-hound-01' down\n\n"
+},
+{
+"line": "=WARNING REPORT==== 2-Jan-2017::21:08:16 ===\nclosing AMQP connection <0.7593.0> (10.76.4.138:43591 -> 10.76.4.109:5672):\nconnection_closed_abruptly\n"
+}
+]
+}
 }
