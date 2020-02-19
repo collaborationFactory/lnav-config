@@ -1,0 +1,310 @@
+{
+    "cplace" : {
+        "title" : "Common cPlace Log",
+        "description" : "The default log format for cplace applications",
+        "multiline" : true,
+        "file-pattern" : ".*cplace.*",
+        "regex" : {
+            "cplace" : {
+                "pattern" : "^(?<timestamp>\\d{4}-\\d{2}-\\d{2}\\s\\d{2}:\\d{2}:\\d{2},\\d{3})\\s\\[(?<thread>[^\\]]*)\\]\\sC:(?<correlation_id>[a-z0-9]*)\\s(?<cp_level>[A-Z]*\\s?)\\s?T:(?<tenant>[^\\s]*)\\s?P:(?<request_path>[^\\s]*)\\s?(?<location>[^\\s]*)\\s\\[(?<file_and_line>(?<file>[^\\:]*):(?<line>[^\\s]*))\\]\\s-\\s(?<message>.*?)"
+            }
+        },
+        "level-field" : "cp_level",
+        "level" : {
+            "error" : "ERROR",
+            "warning" : "WARN",
+            "info" : "INFO",
+            "debug" : "DEBUG"
+        },
+        "opid-field" : "correlation_id",
+        "value" : {
+            "date" : {
+                "kind" : "string",
+                "identifier" : true
+            },
+            "thread" : {
+                "kind" : "string",
+                "identifier" : true
+            },
+            "correlation_id" : {
+                "kind" : "string",
+                "identifier" : true,
+                "description" : "Work related to each other for a request can be found with this id."
+            },
+            "cp_level" : {
+                "kind" : "string",
+                "identifier" : true
+            },
+            "tenant" : {
+                "kind" : "string",
+                "identifier" : true
+            },
+            "request_path" : {
+                "kind" : "string",
+                "identifier" : true
+            },
+            "location" : {
+                "kind" : "string",
+                "identifier" : false,
+                "description" : "Location where the log was triggered"
+            },
+            "file" : {
+                "kind" : "string",
+                "identifier" : true
+            },
+            "message" : {
+                "kind" : "string",
+                "identifier" : false
+            }
+        },
+        "sample" : [
+            {
+                "line" : "2020-01-08 11:03:22,231 [localhost-test] C:12345 T:/cplace/local/ P:/cplace/api/cf/cplace/api cf.cplace.platform.server.LocalLog [lnav.java:11] - individual text",
+                "level" : "info"
+            },
+            {
+                "line" : "2019-11-20 03:25:02,121 [localhost-startStop-1] C: WARN  T: P: cf.cplace.platform.server.ConsoleLog [MultiTenancyConfig.java:9] - global configuration: [externalBaseUrl=https://cf.cplace.test.lnav, useHttpsForAuthentication=false, linuxHtmlFilterSupportsUtf8=true, isMultiNode=true, startInternalEsNode=false, allowAnonymousAccess=false, showRegisterButton=false, sessionMaxInactiveIntervalInSeconds=36000, monitoringEnabled=true]",
+                "level" : "warning"
+            },
+            {
+                "line" : "2019-11-20 03:25:34,434 [localhost-startStop-1] C:ckla34389adklfj33391sdfkj INFO  T: P: c.c.p.s.MultiTenancyResourcesManager [MultiTenancyResourcesManager.java:365] - Starting to initialize tenant pag01",
+                "level" : "info"
+            },
+            {
+                "line" : "2019-11-20 06:51:50,815 [https-jsse-nio-8443-exec-114] C:ckla34389adklfj33391sdfkj WARN  T:/cplace/tenant/ P:/cplace/tenant/cf/cplace/projektplanung/handler/ganttSync c.c.projektplanung.gantt.TaskUpdater [TaskUpdater.java:160] - Client┤ thinks this task is not editable or is external, but still tries to edit TaskForGantt[Id=kaadfklk3qq34adfk,parentId=oleah2zt8ye6kyhz8lcvf7n83,Name=RG 4/Laborfahrzeug,StartDate=2017-01-04,EndDate=2017-01-04]. Ignore update.",
+                "level" : "warning"
+            }
+        ]
+    },
+    "long_request" : {
+        "title" : "Long request",
+        "description" : "",
+        "multiline" : true,
+        "regex" : {
+            "cplace" : {
+                "pattern" : "^(?<timestamp>\\d{4}-\\d{2}-\\d{2}\\s\\d{2}:\\d{2}:\\d{2},\\d{3})\\s\\[(?<thread>[^\\]]*)\\]\\sC:(?<correlation_id>[a-z0-9]*)\\s(?<cp_level>[A-Z]*\\s?)\\s?T:(?<tenant>[^\\s]*)\\s?-\\s[^\\:]*:\\s(?<duration>\\d*)[^\\d]*(?<cpu>[^\\s]*)[^\\/]*(?<handler>[^\\s]*)"
+            }
+        },
+        "level-field" : "duration",
+        "level" : {
+            "warning" : "[3-9][0-9]{5,}"
+        },
+        "opid-field" : "correlation_id",
+        "value" : {
+            "date" : {
+                "kind" : "string",
+                "identifier" : true
+            },
+            "thread" : {
+                "kind" : "string",
+                "identifier" : true
+            },
+            "correlation_id" : {
+                "kind" : "string",
+                "identifier" : true,
+                "description" : "Work related to each other for a request can be found with this id."
+            },
+            "cp_level" : {
+                "kind" : "string",
+                "identifier" : true
+            },
+            "tenant" : {
+                "kind" : "string",
+                "identifier" : true
+            },
+            "duration" : {
+                "kind" : "integer",
+                "identifier" : true
+            },
+            "cpu" : {
+                "kind" : "float",
+                "identifier" : true
+            },
+            "handler" : {
+                "kind" : "string",
+                "identifier" : true
+            }
+        },
+        "sample" : [
+            {
+                "line" : "2019-11-20 03:55:16,458 [https-jsse-nio-8443-exec-143] C:jhdnpd2h6tto2r24qcpev6nrd T: - ------ long taking request: 1503 ms (cpu 5.816812 ms) for /cplace/a",
+                "level" : "info"
+            }
+        ]
+    },
+    "long_jobs" : {
+        "title" : "Long Jobs",
+        "description" : "",
+        "multiline" : true,
+        "regex" : {
+            "cplace" : {
+                "pattern" : "^(?<timestamp>\\d{4}-\\d{2}-\\d{2}\\s\\d{2}:\\d{2}:\\d{2},\\d{3})\\s\\[(?<thread>[^\\]]*)\\]\\sT:(?<tenant>[^\\s]*)\\s?-\\s[^\\:]*:\\s(?<duration>\\d*)[^\\d]*(?<cpu>[^\\s]*)[^\\/]*(?<handler>[^\\s]*)"
+            }
+        },
+        "level-field" : "duration",
+        "level" : {
+            "warning" : "[3-9][0-9]{5,}"
+        },
+        "opid-field" : "correlation_id",
+        "value" : {
+            "date" : {
+                "kind" : "string",
+                "identifier" : true
+            },
+            "thread" : {
+                "kind" : "string",
+                "identifier" : true
+            },
+            "correlation_id" : {
+                "kind" : "string",
+                "identifier" : true,
+                "description" : "Work related to each other for a request can be found with this id."
+            },
+            "cp_level" : {
+                "kind" : "string",
+                "identifier" : true
+            },
+            "tenant" : {
+                "kind" : "string",
+                "identifier" : true
+            },
+            "duration" : {
+                "kind" : "integer",
+                "identifier" : true
+            },
+            "cpu" : {
+                "kind" : "float",
+                "identifier" : true
+            },
+            "handler" : {
+                "kind" : "string",
+                "identifier" : true
+            }
+        },
+        "sample" : [
+            {
+                "line" : "2019-11-20 03:55:16,458 [https-jsse-nio-8443-exec-143] T: - ------ long taking request: 1503 ms (cpu 5.816812 ms) for /cplace/a",
+                "level" : "info"
+            }
+        ]
+    },
+    "perf_json" : {
+        "title" : "Performance Json",
+        "description" : "",
+        "multiline" : true,
+        "regex" : {
+            "cplace" : {
+                "pattern" : "^(?<timestamp>\\d{4}-\\d{2}-\\d{2}\\s\\d{2}:\\d{2}:\\d{2},\\d{3})\\s\\[(?<thread>[^\\]]*)\\]\\sC:(?<correlation_id>[a-z0-9]*)\\s(?<cp_level>[A-Z]*\\s?)\\s?T:(?<tenant>[^\\s]*)\\s?-\\s(?<message>\\.*)"
+            }
+        },
+        "level-field" : "duration",
+        "level" : {
+            "warning" : "[3-9][0-9]{5,}"
+        },
+        "opid-field" : "correlation_id",
+        "value" : {
+            "date" : {
+                "kind" : "string",
+                "identifier" : true
+            },
+            "thread" : {
+                "kind" : "string",
+                "identifier" : true
+            },
+            "correlation_id" : {
+                "kind" : "string",
+                "identifier" : true,
+                "description" : "Work related to each other for a request can be found with this id."
+            },
+            "cp_level" : {
+                "kind" : "string",
+                "identifier" : true
+            },
+            "tenant" : {
+                "kind" : "string",
+                "identifier" : true
+            },
+            "message" : {
+                "kind" : "string"
+            }
+        },
+        "sample" : [
+            {
+                "line" : "2019-11-20 03:55:16,458 [https-jsse-nio-8443-exec-143] C: T: - ------ long taking request: 1503 ms (cpu 5.816812 ms) for /cplace/a",
+                "level" : "info"
+            }
+        ]
+    },
+    "test_format" : {
+        "title" : "test",
+        "description" : "Test description",
+        "regex" : {
+            "cplace-task-updater" : {
+                "pattern" : "^(?<timestamp>\\d{4}-\\d{2}-\\d{2}\\s\\d{2}:\\d{2}:\\d{2},\\d{3})\\s\\[(?<thread>[^\\]]*)\\]\\sC:(?<correlation_id>[a-z0-9]*)\\s(?<cp_level>[A-Z]*\\s?)\\s?T:(?<tenant>[^\\s]*)\\s?P:(?<request_path>[^\\s]*)\\s?(?<location>[^\\s]*)\\s\\[(?<file_and_line>(?<file>TaskUpdater.java):(?<line>[^\\s]*))\\]\\s-\\s(?<message>[^\\[]*\\[Id=(?<task_id>[^,]*),parentId=(?<parent_id>[^,]*))"
+            }
+        },
+        "level-field" : "cp_level",
+        "level" : {
+            "error" : "ERROR",
+            "warning" : "WARN",
+            "info" : "INFO",
+            "debug" : "DEBUG"
+        },
+        "opid-field" : "correlation_id",
+        "value" : {
+            "date" : {
+                "kind" : "string",
+                "identifier" : true
+            },
+            "thread" : {
+                "kind" : "string",
+                "identifier" : true
+            },
+            "correlation_id" : {
+                "kind" : "string",
+                "identifier" : true,
+                "description" : "Work related to each other for a request can be found with this id."
+            },
+            "cp_level" : {
+                "kind" : "string",
+                "identifier" : true
+            },
+            "tenant" : {
+                "kind" : "string",
+                "identifier" : true
+            },
+            "request_path" : {
+                "kind" : "string",
+                "identifier" : true
+            },
+            "location" : {
+                "kind" : "string",
+                "identifier" : false,
+                "description" : "Location where the log was triggered"
+            },
+            "file" : {
+                "kind" : "string",
+                "identifier" : true
+            },
+            "message" : {
+                "kind" : "string",
+                "identifier" : false
+            },
+            "task_id" : {
+                "kind" : "string",
+                "identifier" : true
+            },
+            "parent_id" : {
+                "kind" : "string",
+                "identifier" : true
+            }
+        },
+        "sample" : [
+
+            {
+                "line" : "2019-11-20 06:51:50,815 [https-jsse-nio-8443-exec-114] C:u893r2ww3c0u92ifnqvreatzw WARN  T:/cplace/tenant/ P:/cplace/tenant/cf/cplace/projektplanung/handler/ganttSync c.c.projektplanung.gantt.TaskUpdater [TaskUpdater.java:160] - Client┤ thinks this task is not editable or is external, but still tries to edit TaskForGantt[Id=kaadfklk3qq34adfk,parentId=oleah2zt8ye6kyhz8lcvf7n83,Name=RG 4/Laborfahrzeug,StartDate=2017-01-04,EndDate=2017-01-04]. Ignore update.",
+                "level" : "warning"
+            }
+        ]
+    }
+}
