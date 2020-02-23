@@ -72,10 +72,6 @@
         },
         "opid-field" : "correlation_id",
         "value" : {
-            "date" : {
-                "kind" : "string",
-                "identifier" : true
-            },
             "thread" : {
                 "kind" : "string",
                 "identifier" : true
@@ -104,10 +100,6 @@
             "handler" : {
                 "kind" : "string",
                 "identifier" : true
-            },
-            "rest" : {
-                "kind" : "string",
-                "identifier" : false
             },
             "name" : {
                 "kind" : "string",
