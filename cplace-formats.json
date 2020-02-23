@@ -332,14 +332,17 @@
             }
         ]
     },
-    "test_format" : {
-        "title" : "test",
-        "description" : "Test description",
+    "jetty" : {
+        "title" : "Jetty",
+        "description" : "",
+        "file-pattern" : ".*jetty.*",
+        "multiline" : true,
         "regex" : {
-            "cplace-task-updater" : {
-                "pattern" : "^(?<timestamp>\\d{4}-\\d{2}-\\d{2}\\s\\d{2}:\\d{2}:\\d{2},\\d{3})\\s\\[(?<thread>[^\\]]*)\\]\\sC:(?<correlation_id>[a-z0-9]*)\\s(?<cp_level>[A-Z]*\\s?)\\s?T:(?<tenant>[^\\s]*)\\s?P:(?<request_path>[^\\s]*)\\s?(?<location>[^\\s]*)\\s\\[(?<file_and_line>(?<file>TaskUpdater.java):(?<line>[^\\s]*))\\]\\s-\\s(?<message>[^\\[]*\\[Id=(?<task_id>[^,]*),parentId=(?<parent_id>[^,]*))"
+            "cplace" : {
+                "pattern" : "^(?<timestamp>\\d{4}-\\d{2}-\\d{2}\\s\\d{2}:\\d{2}:\\d{2},\\d{3})\\s\\[(?<thread>[^\\]]*)\\]\\sC:(?<correlation_id>[a-z0-9]*)\\s(?<cp_level>[A-Z]*\\s?)\\s?T:(?<tenant>[^\\s]*)\\s?P:(?<request_path>[^\\s]*)\\s?(?<location>[^\\s]*)\\s\\[(?<file_and_line>(?<file>[^\\:]*):(?<line>[^\\s]*))\\]\\s-\\s(?<body>.*(.*\\n)*)"
             }
         },
+        "opid-field" : "correlation_id",
         "level-field" : "cp_level",
         "level" : {
             "error" : "ERROR",
@@ -347,13 +350,8 @@
             "info" : "INFO",
             "debug" : "DEBUG"
         },
-        "opid-field" : "correlation_id",
         "value" : {
-            "date" : {
-                "kind" : "string",
-                "identifier" : true
-            },
-            "thread" : {
+           "thread" : {
                 "kind" : "string",
                 "identifier" : true
             },
@@ -382,80 +380,13 @@
             "file" : {
                 "kind" : "string",
                 "identifier" : true
-            },
-            "message" : {
-                "kind" : "string",
-                "identifier" : false
-            },
-            "task_id" : {
-                "kind" : "string",
-                "identifier" : true
-            },
-            "parent_id" : {
-                "kind" : "string",
-                "identifier" : true
             }
         },
         "sample" : [
-
             {
-                "line" : "2019-11-20 06:51:50,815 [https-jsse-nio-8443-exec-114] C:u893r2ww3c0u92ifnqvreatzw WARN  T:/cplace/tenant/ P:/cplace/tenant/cf/cplace/projektplanung/handler/ganttSync c.c.projektplanung.gantt.TaskUpdater [TaskUpdater.java:160] - Client┤ thinks this task is not editable or is external, but still tries to edit TaskForGantt[Id=kaadfklk3qq34adfk,parentId=oleah2zt8ye6kyhz8lcvf7n83,Name=RG 4/Laborfahrzeug,StartDate=2017-01-04,EndDate=2017-01-04]. Ignore update.",
-                "level" : "warning"
+                "line" : "2020-01-08 11:03:22,231 [localhost-test] C:12345 T:/cplace/local/ P:/cplace/api/cf/cplace/api cf.cplace.platform.server.LocalLog [lnav.java:11] - individual text",
+                "level" : "info"
             }
         ]
-    },
-"rabbitmq": {
-"title": "RabbitMQ Log",
-"description": "RabbitMQ Log",
-"url": "",
-"multiline": true,
-"regex": {
-"connection": {
-"pattern" : "^=(?<level>[A-Z]+) REPORT==== (?<timestamp>\\d\\d?-\\w{3}-\\d{4}::\\d{2}:\\d{2}:\\d{2}) ===(\\n(?<body>(closing AMQP connection <(?<stuff>.+)> \\((?<sourceIP>\\d[\\d.]+\\d?):(?<sourcePort>\\d+) -> (?<destIP>\\d[\\d.]+\\d?):(?<destPort>\\d+)\\))?(.*\\n)*))?$"
-}
-},
-"timestamp-format" : ["%e-%b-%Y::%H:%M:%S"],
-"level": {
-"error": "ERROR",
-"warning": "WARNING|SUPERVISOR",
-"info": "INFO|PROGRESS",
-"fatal": "CRASH"
-},
-"value" : {
-"body" : {
-"kind" : "string",
-"identifier" : true
-},
-"sourceIP" : {
-"kind" : "string",
-"identifier" : true,
-"collate" : "ipaddress"
-},
-"sourcePort" : {
-"kind" : "integer",
-"identifier" : true
-},
-"destIP" : {
-"kind" : "string",
-"identifier" : true,
-"collate" : "ipaddress"
-},
-"destPort" : {
-"kind" : "integer",
-"identifier" : true
-}
-},
-"json": false,
-"sample": [
-{
-"line": "=ERROR REPORT==== 21-Apr-2016::21:19:01 ===\n** Node 'rabbit@red-hound-01' not responding **\n** Removing (timedout) connection **\n\n"
-},
-{
-"line": "=INFO REPORT==== 21-Apr-2016::21:19:01 ===\nrabbit on node 'rabbit@red-hound-01' down\n\n"
-},
-{
-"line": "=WARNING REPORT==== 2-Jan-2017::21:08:16 ===\nclosing AMQP connection <0.7593.0> (10.76.4.138:43591 -> 10.76.4.109:5672):\nconnection_closed_abruptly\n"
-}
-]
-}
+    }
 }
