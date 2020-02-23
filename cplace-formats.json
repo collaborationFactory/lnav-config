@@ -3,12 +3,12 @@
         "title" : "Common cPlace Log",
         "description" : "The default log format for cplace applications",
         "multiline" : true,
-        "file-pattern" : ".*cplace.*",
         "regex" : {
             "cplace" : {
-                "pattern" : "^(?<timestamp>\\d{4}-\\d{2}-\\d{2}\\s\\d{2}:\\d{2}:\\d{2},\\d{3})\\s\\[(?<thread>[^\\]]*)\\]\\sC:(?<correlation_id>[a-z0-9]*)\\s(?<cp_level>[A-Z]*\\s?)\\s?T:(?<tenant>[^\\s]*)\\s?P:(?<request_path>[^\\s]*)\\s?(?<location>[^\\s]*)\\s\\[(?<file_and_line>(?<file>[^\\:]*):(?<line>[^\\s]*))\\]\\s-\\s(?<message>.*?)"
+                "pattern" : "^(?<timestamp>\\d{4}-\\d{2}-\\d{2}\\s\\d{2}:\\d{2}:\\d{2},\\d{3})\\s\\[(?<thread>[^\\]]*)\\]\\sC:(?<correlation_id>[a-z0-9]*)\\s(?<cp_level>[A-Z]*\\s?)\\s?T:(?<tenant>[^\\s]*)\\s?P:(?<request_path>[^\\s]*)\\s?(?<location>[^\\s]*)\\s\\[(?<file_and_line>(?<file>[^\\:]*):(?<line>[^\\s]*))\\]\\s-\\s(?<body>.*(.*\\n)*)"
             }
         },
+        "module-field" : "correlation_id",
         "level-field" : "cp_level",
         "level" : {
             "error" : "ERROR",
@@ -51,10 +51,6 @@
             "file" : {
                 "kind" : "string",
                 "identifier" : true
-            },
-            "message" : {
-                "kind" : "string",
-                "identifier" : false
             }
         },
         "sample" : [
@@ -73,6 +69,35 @@
             {
                 "line" : "2019-11-20 06:51:50,815 [https-jsse-nio-8443-exec-114] C:ckla34389adklfj33391sdfkj WARN  T:/cplace/tenant/ P:/cplace/tenant/cf/cplace/projektplanung/handler/ganttSync c.c.projektplanung.gantt.TaskUpdater [TaskUpdater.java:160] - Client┤ thinks this task is not editable or is external, but still tries to edit TaskForGantt[Id=kaadfklk3qq34adfk,parentId=oleah2zt8ye6kyhz8lcvf7n83,Name=RG 4/Laborfahrzeug,StartDate=2017-01-04,EndDate=2017-01-04]. Ignore update.",
                 "level" : "warning"
+            }
+        ]
+    },
+    "long_queries" : {
+        "title" : "Long queries",
+        "description" : "",
+        "multiline" : true,
+        "file-pattern" : ".*longQueries.*",
+        "regex" : {
+            "cplace" : {
+                "module-format" : true,
+                "pattern" : "Query\\stook\\s(?<duration>[^\\s]*)[^\\n]*((\\n*\\s*)*Repeated:\\s*(?<repeated>[^\\s]*))?"
+            }
+        },
+        "value" : {
+            "duration" : {
+                "kind" : "float",
+                "identifier" : true
+            },
+            "repeated" : {
+                "kind" : "integer",
+                "identifier" : true
+            }
+
+        },
+        "sample" : [
+            {
+            "line" : "Query took 1661.9 ms:\nRepeated: 145   SELECT",     
+                "level" : "info"
             }
         ]
     },
