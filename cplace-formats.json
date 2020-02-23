@@ -280,25 +280,17 @@
             }
         ]
     },
-    "perf_json" : {
+    "request_performance" : {
         "title" : "Performance Json",
         "description" : "",
         "multiline" : true,
         "regex" : {
             "cplace" : {
-                "pattern" : "^(?<timestamp>\\d{4}-\\d{2}-\\d{2}\\s\\d{2}:\\d{2}:\\d{2},\\d{3})\\s\\[(?<thread>[^\\]]*)\\]\\sC:(?<correlation_id>[a-z0-9]*)\\s(?<cp_level>[A-Z]*\\s?)\\s?T:(?<tenant>[^\\s]*)\\s?-\\s(?<message>\\.*)"
+                "pattern" : "^(?<timestamp>\\d{4}-\\d{2}-\\d{2}\\s\\d{2}:\\d{2}:\\d{2},\\d{3})\\s\\[(?<thread>[^\\]]*)\\]\\sC:(?<correlation_id>[a-z0-9]*)\\s?T:(?<tenant>[^\\s]*)\\s?-\\sid=(?<id>[^,]*),\\s((?<duration>[^\\s]*)\\sms\\s\\(cpu\\s(?<cpu>[^\\s]*)\\sms\\))?(started)?\\sfor\\spath\\s(?<path>.*)"
             }
-        },
-        "level-field" : "duration",
-        "level" : {
-            "warning" : "[3-9][0-9]{5,}"
         },
         "opid-field" : "correlation_id",
         "value" : {
-            "date" : {
-                "kind" : "string",
-                "identifier" : true
-            },
             "thread" : {
                 "kind" : "string",
                 "identifier" : true
@@ -308,21 +300,34 @@
                 "identifier" : true,
                 "description" : "Work related to each other for a request can be found with this id."
             },
-            "cp_level" : {
-                "kind" : "string",
-                "identifier" : true
-            },
             "tenant" : {
                 "kind" : "string",
                 "identifier" : true
             },
-            "message" : {
-                "kind" : "string"
+            "id" : {
+                "kind" : "string",
+                "identifier" : true
+            },
+            "duration" : {
+                "kind" : "integer",
+                "identifier" : true
+            },
+            "cpu" : {
+                "kind" : "float",
+                "identifier" : true
+            },
+            "path" : {
+                "kind" : "string",
+                "identifier" : true
             }
         },
         "sample" : [
             {
-                "line" : "2019-11-20 03:55:16,458 [https-jsse-nio-8443-exec-143] C: T: - ------ long taking request: 1503 ms (cpu 5.816812 ms) for /cplace/a",
+                "line" : "2019-11-20 03:55:16,458 [https-jsse-nio-8443-exec-143] C: T: - id=31324, started for path /cplace/tenant/path ",
+                "level" : "info"
+            },
+            {
+                "line" : "2019-11-20 03:55:16,458 [https-jsse-nio-8443-exec-143] C: T: - id=31324, 12 ms (cpu 4.2341 ms) for path /cplace/tenant/path",
                 "level" : "info"
             }
         ]
