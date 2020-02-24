@@ -188,7 +188,7 @@
         "file-pattern" : ".*longJobs.*",
         "regex" : {
             "cplace" : {
-                "pattern" : "^(?<timestamp>\\d{4}-\\d{2}-\\d{2}\\s\\d{2}:\\d{2}:\\d{2},\\d{3})\\s\\[(?<thread>[^\\]]*)\\]\\sT:(?<tenant>[^\\s]*)\\s?-\\s[^\\:]*:\\s(?<duration>\\d*)\\s\\ms([^\\(]*\\(cpu\\s*(?<cpu>[^\\s]*\\sms\\)))?\\s?for\\s(?<type>[^\\s]*)\\s(?<handler>[^\\s]*)[^\\n]*(\\n(?<header>(.*\\n(?<name>[^\\s]*)\\s[^\\d]*(?<hits>\\d*)\\s*(?<total>[^\\s]*)\\s*(?<average>[^\\s]*)\\s*(?<max>[^\\s]*)\\n?)*))?"
+                "pattern" : "^(?<timestamp>\\d{4}-\\d{2}-\\d{2}\\s\\d{2}:\\d{2}:\\d{2},\\d{3})\\s\\[(?<thread>[^\\]]*)\\]\\sT:(?<tenant>[^\\s]*)\\s?-\\s[^\\:]*:\\s(?<duration>\\d*)\\s\\ms([^\\(]*\\(cpu\\s*(?<cpu>[^\\s]*\\sms\\)))?\\s?for\\s(?<type>[^\\s]*)\\s(?<handler>[^\\s]*)[^\\n]*"//this could be used again when lnav has better support for multiline regex(\\n(?<header>(.*\\n(?<name>[^\\s]*)\\s[^\\d]*(?<hits>\\d*)\\s*(?<total>[^\\s]*)\\s*(?<average>[^\\s]*)\\s*(?<max>[^\\s]*)\\n?)*))?"
             }
         },
         "level-field" : "duration",
@@ -197,10 +197,6 @@
         },
         "opid-field" : "correlation_id",
         "value" : {
-            "date" : {
-                "kind" : "string",
-                "identifier" : true
-            },
             "thread" : {
                 "kind" : "string",
                 "identifier" : true
@@ -259,7 +255,12 @@
             {
                 "line" : "2019-11-20 03:55:16,458 [https-jsse-nio-8443-exec-143] T: - ------ long taking request: 1503 ms (cpu 5.816812 ms) for task cplace/a",
                 "level" : "info"
+            },
+            {
+                "line" : "2019-11-20 03:55:16,458 [https-jsse-nio-8443-exec-143] T: - ------ long taking task: 1503 ms for job cplace/a",
+                "level" : "info"
             }
+
         ]
     },
     "long_queries" : {
