@@ -263,6 +263,68 @@
 
         ]
     },
+    "job_performance" : {
+        "title" : "Job Performance",
+        "description" : "",
+        "multiline" : true,
+        "file-pattern" : ".*jobPerformance.*",
+        "regex" : {
+            "cplace" : {
+                "pattern" : "^(?<timestamp>\\d{4}-\\d{2}-\\d{2}\\s\\d{2}:\\d{2}:\\d{2},\\d{3})\\s\\[(?<thread>[^\\]]*)\\]\\sC:(?<correlation_id>[a-z0-9]*)\\s(?<level>[A-Z]*\\s?)\\s?T:(?<tenant>[^\\s]*)\\s?-\\s(?<duration>\\d*)\\s\\ms([^\\(]*\\(cpu\\s(?<cpu>[^\\s]*\\sms\\)))?\\s?for\\s(?<type>[^\\s]*)\\s(?<handler>[^\\s]*)"
+            }
+        },
+        "level-field" : "duration",
+        "level" : {
+            "warning" : "[3-9][0-9]{5,}"
+        },
+        "opid-field" : "correlation_id",
+        "value" : {
+            "thread" : {
+                "kind" : "string",
+                "identifier" : true
+            },
+            "correlation_id" : {
+                "kind" : "string",
+                "identifier" : true,
+                "description" : "Work related to each other for a request can be found with this id."
+            },
+            "level" : {
+                "kind" : "string",
+                "identifier" : true
+            },
+            "tenant" : {
+                "kind" : "string",
+                "identifier" : true
+            },
+            "duration" : {
+                "kind" : "integer",
+                "identifier" : true
+            },
+            "cpu" : {
+                "kind" : "float",
+                "identifier" : true
+            },
+            "type" : {
+                "kind" : "string",
+                "identifier" : true
+            },
+            "handler" : {
+                "kind" : "string",
+                "identifier" : true
+            }
+        },
+        "sample" : [
+            {
+                "line" : "2019-11-20 03:55:16,458 [https-jsse-nio-8443-exec-143] C:kadfh3asdfjadsfjh3adsh343 T: - 1503 ms (cpu 5.816812 ms) for task /cplace/a",
+                "level" : "info"
+            },
+            {
+                "line" : "2019-11-20 03:55:16,458 [https-jsse-nio-8443-exec-143] C:kadfh3asdfjadsfjh3adsh343 T: - 1503 ms for job /cplace/a",
+                "level" : "info"
+            }
+
+        ]
+    },
     "long_queries" : {
         "title" : "Long queries",
         "description" : "",
