@@ -6,7 +6,7 @@
         "multiline" : true,
         "regex" : {
             "cplace" : {
-                "pattern" : "^(?<timestamp>\\d{4}-\\d{2}-\\d{2}\\s\\d{2}:\\d{2}:\\d{2},\\d{3})\\s\\[(?<thread>[^\\]]*)\\]\\sC:(?<correlation_id>[a-z0-9]*)\\s(?<level>[A-Z]*\\s?)\\s?T:(?<tenant>[^\\s]*)\\s?P:(?<request_path>[^\\s]*)\\s?(?<location>[^\\s]*)\\s\\[(?<file_and_line>(?<file>[^\\:]*):(?<line>[^\\s]*))\\]\\s-\\s(?<body>.*(.*\\n)*)"
+                "pattern" : "^(?<timestamp>\\d{4}-\\d{2}-\\d{2}\\s\\d{2}:\\d{2}:\\d{2},\\d{3})\\s\\[(?<thread>[^\\]]*)\\]\\sC:(?<correlation_id>[a-z0-9]*)\\s(?<level>[A-Z]*\\s?)\\s?T:(?<tenant>[^\\s]*)\\s?P:(?<request_path>[^\\s]*)\\s?(?<location>[^\\s]*)\\s\\[(?<file_and_line>(?<file>[^\\:]*):(?<line>[^\\s]*))\\]\\s-\\s(?<message>.*(.*\\n)*)"
             }
         },
         "opid-field" : "correlation_id",
@@ -130,46 +130,46 @@
         ]
      },
      "request_performance" : {
-     "title" : "Performance Json",
-     "description" : "",
-     "multiline" : true,
-     "regex" : {
-        "cplace" : {
-            "pattern" : "^(?<timestamp>\\d{4}-\\d{2}-\\d{2}\\s\\d{2}:\\d{2}:\\d{2},\\d{3})\\s\\[(?<thread>[^\\]]*)\\]\\sC:(?<correlation_id>[a-z0-9]*)\\s?T:(?<tenant>[^\\s]*)\\s?-\\sid=(?<id>[^,]*),\\s((?<duration>[^\\s]*)\\sms\\s\\(cpu\\s(?<cpu>[^\\s]*)\\sms\\))?(started)?\\sfor\\spath\\s(?<path>.*)"
-        }
-     },
-     "opid-field" : "correlation_id",
-     "value" : {
-        "thread" : {
-            "kind" : "string",
-            "identifier" : true
+         "title" : "Performance Json",
+         "description" : "",
+         "multiline" : true,
+         "regex" : {
+            "cplace" : {
+                "pattern" : "^(?<timestamp>\\d{4}-\\d{2}-\\d{2}\\s\\d{2}:\\d{2}:\\d{2},\\d{3})\\s\\[(?<thread>[^\\]]*)\\]\\sC:(?<correlation_id>[a-z0-9]*)\\s?T:(?<tenant>[^\\s]*)\\s?-\\sid=(?<id>[^,]*),\\s((?<duration>[^\\s]*)\\sms\\s\\(cpu\\s(?<cpu>[^\\s]*)\\sms\\))?(started)?\\sfor\\spath\\s(?<path>.*)"
+            }
+         },
+         "opid-field" : "correlation_id",
+         "value" : {
+            "thread" : {
+                "kind" : "string",
+                "identifier" : true
+            },
+            "correlation_id" : {
+                "kind" : "string",
+                "identifier" : true,
+                "description" : "Work related to each other for a request can be found with this id."
+            },
+            "tenant" : {
+                "kind" : "string",
+                "identifier" : true
+            },
+            "id" : {
+                "kind" : "string",
+                "identifier" : true
+            },
+            "duration" : {
+                "kind" : "integer",
+                "identifier" : true
+            },
+            "cpu" : {
+                "kind" : "float",
+                "identifier" : true
+            },
+            "path" : {
+                "kind" : "string",
+                "identifier" : true
+            }
         },
-        "correlation_id" : {
-            "kind" : "string",
-            "identifier" : true,
-            "description" : "Work related to each other for a request can be found with this id."
-        },
-        "tenant" : {
-            "kind" : "string",
-            "identifier" : true
-        },
-        "id" : {
-            "kind" : "string",
-            "identifier" : true
-        },
-        "duration" : {
-            "kind" : "integer",
-            "identifier" : true
-        },
-        "cpu" : {
-            "kind" : "float",
-            "identifier" : true
-        },
-        "path" : {
-            "kind" : "string",
-            "identifier" : true
-        }
-    },
         "sample" : [
             {
                 "line" : "2019-11-20 03:55:16,458 [https-jsse-nio-8443-exec-143] C: T: - id=31324, started for path /cplace/tenant/path ",
@@ -325,6 +325,67 @@
 
         ]
     },
+    "job_audit" : {
+        "title" : "Job Execution Audit",
+        "description" : "",
+        "file-pattern" : ".*jobExecutionAudit.*",
+        "multiline" : true,
+        "regex" : {
+            "cplace" : {
+                "pattern" : "^(?<timestamp>\\d{4}-\\d{2}-\\d{2}\\s\\d{2}:\\d{2}:\\d{2},\\d{3})\\s\\[(?<thread>[^\\]]*)\\]\\sC:(?<correlation_id>[a-z0-9]*)\\s(?<level>[A-Z]*\\s?)\\s?T:(?<tenant>[^\\s]*)\\s?P:(?<request_path>[^\\s]*)\\s?(?<location>[^\\s]*)\\s\\[(?<file_and_line>(?<file>[^\\:]*):(?<line>[^\\s]*))\\]\\s-\\s(?<message>.*)"
+            }
+        },
+        "opid-field" : "correlation_id",
+        "level-field" : "level",
+        "level" : {
+            "error" : "ERROR",
+            "warning" : "WARN",
+            "info" : "INFO",
+            "debug" : "DEBUG"
+        },
+        "value" : {
+           "thread" : {
+                "kind" : "string",
+                "identifier" : true
+            },
+            "correlation_id" : {
+                "kind" : "string",
+                "identifier" : true,
+                "description" : "Work related to each other for a request can be found with this id."
+            },
+            "level" : {
+                "kind" : "string",
+                "identifier" : true
+            },
+            "tenant" : {
+                "kind" : "string",
+                "identifier" : true
+            },
+            "request_path" : {
+                "kind" : "string",
+                "identifier" : true
+            },
+            "location" : {
+                "kind" : "string",
+                "identifier" : false,
+                "description" : "Location where the log was triggered"
+            },
+            "file" : {
+                "kind" : "string",
+                "identifier" : true
+            },
+            "message" : {
+                "kind" : "json",
+                "hidden" : true
+            }
+        },
+        "sample" : [
+            {
+                "line" : "2020-01-08 11:03:22,231 [localhost-test] C:12345 T:/cplace/local/ P:/cplace/api/cf/cplace/api cf.cplace.platform.server.LocalLog [lnav.java:11] - individual text",
+                "level" : "info"
+            }
+        ]
+    },
     "long_queries" : {
         "title" : "Long queries",
         "description" : "",
@@ -395,7 +456,7 @@
         "multiline" : true,
         "regex" : {
             "cplace" : {
-                "pattern" : "^(?<timestamp>\\d{4}-\\d{2}-\\d{2}\\s\\d{2}:\\d{2}:\\d{2},\\d{3})\\s\\[(?<thread>[^\\]]*)\\]\\sC:(?<correlation_id>[a-z0-9]*)\\s(?<level>[A-Z]*\\s?)\\s?T:(?<tenant>[^\\s]*)\\s?P:(?<request_path>[^\\s]*)\\s?(?<location>[^\\s]*)\\s\\[(?<file_and_line>(?<file>[^\\:]*):(?<line>[^\\s]*))\\]\\s-\\s(?<body>.*(.*\\n)*)"
+                "pattern" : "^(?<timestamp>\\d{4}-\\d{2}-\\d{2}\\s\\d{2}:\\d{2}:\\d{2},\\d{3})\\s\\[(?<thread>[^\\]]*)\\]\\sC:(?<correlation_id>[a-z0-9]*)\\s(?<level>[A-Z]*\\s?)\\s?T:(?<tenant>[^\\s]*)\\s?P:(?<request_path>[^\\s]*)\\s?(?<location>[^\\s]*)\\s\\[(?<file_and_line>(?<file>[^\\:]*):(?<line>[^\\s]*))\\]\\s-\\s(?<message>.*(.*\\n)*)"
             }
         },
         "opid-field" : "correlation_id",
