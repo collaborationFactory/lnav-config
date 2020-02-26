@@ -509,6 +509,85 @@
             }
         ]
     },
+    "performance_snapshots" : {
+        "title" : "Performance Snapshot",
+        "description" : "",
+        "file-pattern" : ".*performanceSnapshot.*",
+        "multiline" : true,
+        "regex" : {
+            "core" : {
+                "pattern" : "^(?<timestamp>\\d{4}-\\d{2}-\\d{2}\\s\\d{2}:\\d{2}:\\d{2},\\d{3})\\s\\[(?<thread>[^\\]]*)\\]\\sT:(?<tenant>[^\\s]*)\\s-\\s*$"
+            },
+            "java-heap" : {
+                "pattern" : "^(?<timestamp>\\d{4}-\\d{2}-\\d{2}\\s\\d{2}:\\d{2}:\\d{2},\\d{3})\\s\\[(?<thread>[^\\]]*)\\]\\sT:(?<tenant>[^\\s]*)\\s-\\sJava\\sheap\\ssize:\\sUsed\\s(?<heap_used>\\d*)[^\\d]*(?<total_heap>\\d*)[^\\d]*(?<max_heap>\\d*).*(\\n.*?Used\\s(?<non_heap_used>\\d*)[^\\d]*(?<total_non_heap>\\d*)[^\\d]*(?<max_non_heap>\\d*).*\\n.*?\\s-\\s[^\\/]*(?<appl_dir>[^:]*)[^\\d]*(?<appl_free>\\d*)[^\\d]*(?<appl_total>\\d*).*\\n.*?\\s-\\s[^\\/]*(?<nfs_dir>[^:]*)[^\\d]*(?<nfs_free>\\d*)[^\\d]*(?<nfs_total>\\d*))?"
+            }
+        },
+        "value" : {
+           "thread" : {
+                "kind" : "string",
+                "identifier" : true
+            },
+            "tenant" : {
+                "kind" : "string",
+                "identifier" : true
+            },
+            "heap_used" : {
+                "kind" : "integer",
+                "identifier" : true
+            },
+            "total_heap" : {
+                "kind" : "integer",
+                "identifier" : true
+            },
+            "max_heap" : {
+                "kind" : "integer",
+                "identifier" : true
+            },
+            "non_heap_used" : {
+                "kind" : "integer",
+                "identifier" : true
+            },
+            "total_non_heap" : {
+                "kind" : "integer",
+                "identifier" : true
+            },
+            "max_non_heap" : {
+                "kind" : "integer",
+                "identifier" : true
+            },
+            "appl_dir" : {
+                "kind" : "string",
+                "identifier" : true
+            },
+            "appl_free" : {
+                "kind" : "integer",
+                "identifier" : true
+            },
+            "appl_total" : {
+                "kind" : "integer",
+                "identifier" : true
+            },
+            "nfs_dir" : {
+                "kind" : "string",
+                "identifier" : true
+            },
+            "nfs_free" : {
+                "kind" : "integer",
+                "identifier" : true
+            },
+            "nfs_total" : {
+                "kind" : "integer",
+                "identifier" : true
+            }
+
+        },
+        "sample" : [
+            {
+                "line" : "2020-01-08 11:03:22,231 [localhost-test] T:/cplace/local/ -",
+                "level" : "info"
+            }
+        ]
+},
     "jetty" : {
         "title" : "Jetty",
         "description" : "",
