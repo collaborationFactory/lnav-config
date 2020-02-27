@@ -1172,6 +1172,104 @@
             }
         ]
     },
+    "person_or_membership_changes" :
+    {
+        "title" : "Person Or Membership Changes",
+        "description" : "",
+        "file-pattern" : ".*personOrMembershipChanges.*",
+        "multiline" : true,
+        "regex" : {
+            "cplace" : {
+                "pattern" : "^(?<timestamp>\\d{4}-\\d{2}-\\d{2}\\s\\d{2}:\\d{2}:\\d{2},\\d{3})\\s\\[(?<thread>[^\\]]*)\\]\\sC:(?<correlation_id>[a-z0-9]*)\\s(?<level>[A-Z]*\\s?)\\s?T:(?<tenant>[^\\s]*)\\s?P:(?<request_path>[^\\s]*)\\s?(?<location>[^\\s]*)\\s\\[(?<file_and_line>(?<file>[^\\:]*):(?<line>[^\\s]*))\\]\\s-\\s[^:]*:(?<change_event>[^\\s]*)[^:]*:(?<changed_entity_id>[^\\s]*)[^:]*:(?<changed_entity_name>.*(?=Affected))[^:]*:(?<affected_group_membership>[^\\s]*)[^:]*:(?<issuer_id>[^\\s]*)[^:]*:(?<issuer_ldap_identifier>[^\\s]*)[^:]*:(?<issuer_mail>[^\\s]*)[^:]*:(?<issuer_login>[^\\s]*)[^:]*:(?<batch_job_name>[^\\s]*)[^:]*:(?<batch_job_id>[^\\s]*)"
+            }
+        },
+        "opid-field" : "correlation_id",
+        "level-field" : "level",
+        "level" : {
+            "error" : "ERROR",
+            "warning" : "WARN",
+            "info" : "INFO",
+            "debug" : "DEBUG"
+        },
+        "value" : {
+           "thread" : {
+                "kind" : "string",
+                "identifier" : true
+            },
+            "correlation_id" : {
+                "kind" : "string",
+                "identifier" : true,
+                "description" : "Work related to each other for a request can be found with this id."
+            },
+            "level" : {
+                "kind" : "string",
+                "identifier" : true
+            },
+            "tenant" : {
+                "kind" : "string",
+                "identifier" : true
+            },
+            "request_path" : {
+                "kind" : "string",
+                "identifier" : true
+            },
+            "location" : {
+                "kind" : "string",
+                "identifier" : false,
+                "description" : "Location where the log was triggered"
+            },
+            "file" : {
+                "kind" : "string",
+                "identifier" : true
+            },
+            "change_event" : {
+                "kind" : "string",
+                "identifier" : true
+            },
+            "changed_entity_id" : {
+                "kind" : "string",
+                "identifier" : true
+            },
+            "changed_entity_name" : {
+                "kind" : "string",
+                "identifier" : true
+            },
+            "affected_group_membership" : {
+                "kind" : "string",
+                "identifier" : true
+            },
+            "issuer_id" : {
+                "kind" : "string",
+                "identifier" : true
+            },
+            "issuer_ldap_identifier" : {
+                "kind" : "string",
+                "identifier" : true
+            },
+            "issuer_mail" : {
+                "kind" : "string",
+                "identifier" : true
+            },
+            "issuer_login" : {
+                "kind" : "string",
+                "identifier" : true
+            },
+            "batch_job_name" : {
+                "kind" : "string",
+                "identifier" : true
+            },
+            "batch_job_id" : {
+                "kind" : "string",
+                "identifier" : true
+            }
+        },
+        "sample" : [
+            {
+                "line" : "2020-02-13 10:59:54,443 [thread] C: INFO  T:/cplace/tenant/ P: cf.domain [File.java:153] - ChangeEvent:disable_user  ChangedEntityId:234jakfd34   ChangedEntityName:Mustermann, Max (Abteilung) AffectedGroupMembership:    IssuerID:   IssuerLdapIdentifier:   IssuerMail: IssuerLogin:    batchJobName:cf.cplace.platform.server.ldap.LdapJob batchJobId:kadk3412k3cka",
+                "level" : "info"
+            }
+        ]
+    },
     "jetty" : {
         "title" : "Jetty",
         "description" : "",
