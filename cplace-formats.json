@@ -93,6 +93,10 @@
                 "kind" : "string",
                 "identifier" : true
             },
+            "user_id" : {
+                "kind" : "string",
+                "identifier" : true
+            },
             "duration" : {
                 "kind" : "integer",
                 "identifier" : true
@@ -104,26 +108,6 @@
             "handler" : {
                 "kind" : "string",
                 "identifier" : true
-            },
-            "name" : {
-                "kind" : "string",
-                "identifier" : false
-            },
-            "hits" : {
-                "kind" : "integer",
-                "identifier" : false
-            },
-            "total" : {
-                "kind" : "string",
-                "identifier" : false
-            },
-            "average" : {
-                "kind" : "string",
-                "identifier" : false
-            },
-            "max" : {
-                "kind" : "string",
-                "identifier" : false
             }
         },
         "sample" : [
@@ -139,7 +123,7 @@
          "multiline" : true,
          "regex" : {
             "cplace" : {
-                "pattern" : "^(?<timestamp>\\d{4}-\\d{2}-\\d{2}\\s\\d{2}:\\d{2}:\\d{2},\\d{3})\\s\\[(?<thread>[^\\]]*)\\]\\sC:(?<correlation_id>[a-z0-9]*)\\s?T:(?<tenant>[^\\s]*)\\s?-\\sid=(?<id>[^,]*),\\s((?<duration>[^\\s]*)\\sms\\s\\(cpu\\s(?<cpu>[^\\s]*)\\sms\\))?(started)?\\sfor\\spath\\s(?<path>.*)"
+                "pattern" : "^(?<timestamp>\\d{4}-\\d{2}-\\d{2}\\s\\d{2}:\\d{2}:\\d{2},\\d{3})\\s\\[(?<thread>[^\\]]*)\\]\\sC:(?<correlation_id>[a-z0-9]*)\\s?T:(?<tenant>[^\\s]*)\\s?(?<user_id>[^\\s]*)\\s?-\\sid=(?<id>[^,]*),\\s((?<duration>[^\\s]*)\\sms\\s\\(cpu\\s(?<cpu>[^\\s]*)\\sms\\))?(started)?\\sfor\\spath\\s(?<path>.*)"
             }
          },
          "opid-field" : "correlation_id",
@@ -154,6 +138,10 @@
                 "description" : "Work related to each other for a request can be found with this id."
             },
             "tenant" : {
+                "kind" : "string",
+                "identifier" : true
+            },
+            "user_id" : {
                 "kind" : "string",
                 "identifier" : true
             },
@@ -176,11 +164,11 @@
         },
         "sample" : [
             {
-                "line" : "2019-11-20 03:55:16,458 [https-jsse-nio-8443-exec-143] C: T: - id=31324, started for path /cplace/tenant/path ",
+                "line" : "2020-02-27 14:50:39,654 [http-connection-1152] C:314k41kasdk T: U: - id=2341, started for path /qa/__213481028fkadsfkj32345gja/3rdParty/modified/akdafkj.gif ",
                 "level" : "info"
             },
             {
-                "line" : "2019-11-20 03:55:16,458 [https-jsse-nio-8443-exec-143] C: T: - id=31324, 12 ms (cpu 4.2341 ms) for path /cplace/tenant/path",
+                "line" : "2020-02-27 14:50:39,553 [http-connection-1141] C:paskdf34123ja T:/qa/ U: - id=3214, 1 ms (cpu 1.423465 ms) for path /qa/__901234kadsfkj83143mpn3gja/3rdParty/modified/akdaf.gif",
                 "level" : "info"
             }
         ]
