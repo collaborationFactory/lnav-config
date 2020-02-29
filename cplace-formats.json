@@ -242,7 +242,7 @@
         "file-pattern" : ".*jobPerformance.*",
         "regex" : {
             "cplace" : {
-                "pattern" : "^(?<timestamp>\\d{4}-\\d{2}-\\d{2}\\s\\d{2}:\\d{2}:\\d{2},\\d{3})\\s\\[(?<thread>[^\\]]*)\\]\\sC:(?<correlation_id>[a-z0-9]*)\\s(?<level>[A-Z]*\\s?)\\s?T:(?<tenant>[^\\s]*)\\s?-\\s(?<duration>\\d*)\\s\\ms([^\\(]*\\(cpu\\s(?<cpu>[^\\s]*\\sms\\)))?\\s?for\\s(?<type>[^\\s]*)\\s(?<handler>[^\\s]*)"
+                "pattern" : "^(?<timestamp>\\d{4}-\\d{2}-\\d{2}\\s\\d{2}:\\d{2}:\\d{2},\\d{3})\\s\\[(?<thread>[^\\]]*)\\]\\sC:(?<correlation_id>[a-z0-9]*)\\s(?<level>[A-Z]*\\s?)\\s?T:(?<tenant>[^\\s]*)\\s?(?<user_id>[^\\s]*)\\s?-\\s(?<duration>\\d*)\\s\\ms([^\\(]*\\(cpu\\s(?<cpu>[^\\s]*\\sms\\)))?\\s?for\\s(?<type>[^\\s]*)\\s(?<handler>[^\\s]*)"
             }
         },
         "level-field" : "duration",
@@ -287,11 +287,11 @@
         },
         "sample" : [
             {
-                "line" : "2019-11-20 03:55:16,458 [https-jsse-nio-8443-exec-143] C:kadfh3asdfjadsfjh3adsh343 T: - 1503 ms (cpu 5.816812 ms) for task /cplace/a",
+                "line" : "2020-01-12 03:16:22,603 [taskManager-4 cplace-task-2274-UpdateItemsTask] C: T: U: - 212 ms (cpu 23.122831 ms) for task cf.cplace.itemList.script.UpdateItemsTask ",
                 "level" : "info"
             },
             {
-                "line" : "2019-11-20 03:55:16,458 [https-jsse-nio-8443-exec-143] C:kadfh3asdfjadsfjh3adsh343 T: - 1503 ms for job /cplace/a",
+                "line" : "2020-01-12 03:16:22,163 [persistentJob-4 cplace-job-3-UpdateItemsJob (tenantId pag_rxf1, jobId kadkf3421k324)] C: T:/asd_kadx/ U:-dummy-session - 62 ms for job cf.cplace.itemList.script.UpdateItemsJob ",
                 "level" : "info"
             }
 
