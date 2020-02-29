@@ -6,7 +6,7 @@
         "multiline" : true,
         "regex" : {
             "cplace" : {
-                "pattern" : "^(?<timestamp>\\d{4}-\\d{2}-\\d{2}\\s\\d{2}:\\d{2}:\\d{2},\\d{3})\\s\\[(?<thread>[^\\]]*)\\]\\sC:(?<correlation_id>[a-z0-9]*)\\s(?<level>[A-Z]*\\s?)\\s?T:(?<tenant>[^\\s]*)\\s?P:(?<request_path>[^\\s]*)\\s?(?<location>[^\\s]*)\\s\\[(?<file_and_line>(?<file>[^\\:]*):(?<line>[^\\s]*))\\]\\s-\\s(?<message>.*(.*\\n)*)"
+                "pattern" : "^(?<timestamp>\\d{4}-\\d{2}-\\d{2}\\s\\d{2}:\\d{2}:\\d{2},\\d{3})\\s\\[(?<thread>[^\\]]*)\\]\\sC:(?<correlation_id>[a-z0-9]*)\\s(?<level>[A-Z]*\\s?)\\s?T:(?<tenant>[^\\s]*)\\s?(?<user_id>[^\\s]*)\\s?P:(?<request_path>[^\\s]*)\\s?(?<location>[^\\s]*)\\s\\[(?<file_and_line>(?<file>[^\\:]*):(?<line>[^\\s]*))\\]\\s-\\s(?<message>.*(.*\\n)*)"
             }
         },
         "opid-field" : "correlation_id",
@@ -35,6 +35,10 @@
                 "kind" : "string",
                 "identifier" : true
             },
+            "user_id" : {
+                "kind" : "string",
+                "identifier" : true
+            },
             "request_path" : {
                 "kind" : "string",
                 "identifier" : true
@@ -51,8 +55,8 @@
         },
         "sample" : [
             {
-                "line" : "2020-01-08 11:03:22,231 [localhost-test] C:12345 T:/cplace/local/ P:/cplace/api/cf/cplace/api cf.cplace.platform.server.LocalLog [lnav.java:11] - individual text",
-                "level" : "info"
+                "line" : "2020-02-26 11:12:19,503 [http-connection-811] C:kadsf813084123 WARN  T:/qa/ U:akfjkda3-nodekasdfjk34 P:/qa/custom/downloadExport cf.test.location. [MagicMimeMimeDetector.java:462] - /etc/magic.mime",
+                "level" : "warning"
             }
         ]
     },
