@@ -180,7 +180,7 @@
         "file-pattern" : ".*longJobs.*",
         "regex" : {
             "cplace" : {
-                "pattern" : "^(?<timestamp>\\d{4}-\\d{2}-\\d{2}\\s\\d{2}:\\d{2}:\\d{2},\\d{3})\\s\\[(?<thread>[^\\]]*)\\]\\sT:(?<tenant>[^\\s]*)\\s?-\\s[^\\:]*:\\s(?<duration>\\d*)\\s\\ms([^\\(]*\\(cpu\\s*(?<cpu>[^\\s]*\\sms\\)))?\\s?for\\s(?<type>[^\\s]*)\\s(?<handler>[^\\s]*)[^\\n]*"//this could be used again when lnav has better support for multiline regex(\\n(?<header>(.*\\n(?<name>[^\\s]*)\\s[^\\d]*(?<hits>\\d*)\\s*(?<total>[^\\s]*)\\s*(?<average>[^\\s]*)\\s*(?<max>[^\\s]*)\\n?)*))?"
+                "pattern" : "^(?<timestamp>\\d{4}-\\d{2}-\\d{2}\\s\\d{2}:\\d{2}:\\d{2},\\d{3})\\s\\[(?<thread>[^\\]]*)\\]\\sT:(?<tenant>[^\\s]*)\\s?-\\s[^\\:]*:\\s(?<duration>\\d*)\\s\\ms([^\\(]*\\(cpu\\s*(?<cpu>[^\\s]*\\sms\\)))?\\s?for\\s(?<type>[^\\s]*)\\s(?<handler>[^\\s]*)[^\\n]*"
             }
         },
         "level-field" : "duration",
@@ -221,35 +221,15 @@
             "handler" : {
                 "kind" : "string",
                 "identifier" : true
-            },
-            "name" : {
-                "kind" : "string",
-                "identifier" : false
-            },
-            "hits" : {
-                "kind" : "integer",
-                "identifier" : false
-            },
-            "total" : {
-                "kind" : "string",
-                "identifier" : false
-            },
-            "average" : {
-                "kind" : "string",
-                "identifier" : false
-            },
-            "max" : {
-                "kind" : "string",
-                "identifier" : false
             }
         },
         "sample" : [
             {
-                "line" : "2019-11-20 03:55:16,458 [https-jsse-nio-8443-exec-143] T: - ------ long taking request: 1503 ms (cpu 5.816812 ms) for task cplace/a",
+                "line" : "2020-02-21 03:12:37,438 [taskManager-1 cplace-task-1293-InitLibrary$$Lambda$686/2341231878] T: - ------ long taking task: 2341 ms (cpu 123.1341234 ms) for task cf.cplace.pptexport.InitLibrary$$Lambda$686/2134131078 ------ ",
                 "level" : "info"
             },
             {
-                "line" : "2019-11-20 03:55:16,458 [https-jsse-nio-8443-exec-143] T: - ------ long taking task: 1503 ms for job cplace/a",
+                "line" : "2020-02-20 09:41:36,423 [persistentJob-2 cplace-job-20-ExportPageSpaceJob (tenantId qa, jobId kasdkjfj344)] T:/qa/ - ------ long taking task: 1342 ms for job cf.cplace.platform.handler.dataexport.ExportPageSpaceJob ------ ",
                 "level" : "info"
             }
 
