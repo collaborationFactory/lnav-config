@@ -6,7 +6,7 @@
         "multiline" : true,
         "regex" : {
             "cplace" : {
-                "pattern" : "^(?<timestamp>\\d{4}-\\d{2}-\\d{2}\\s\\d{2}:\\d{2}:\\d{2},\\d{3})\\s\\[(?<thread>[^\\]]*)\\]\\sC:(?<correlation_id>[a-z0-9]*)\\s(?<level>[A-Z]*\\s?)\\s?T:(?<tenant>[^\\s]*)\\s?(?<user_id>[^\\s]*)\\s?P:(?<request_path>[^\\s]*)\\s?(?<location>[^\\s]*)\\s\\[(?<file_and_line>(?<file>[^\\:]*):(?<line>[^\\s]*))\\]\\s-\\s(?<message>.*(.*\\n)*)"
+                "pattern" : "^(?<timestamp>\\d{4}-\\d{2}-\\d{2}\\s\\d{2}:\\d{2}:\\d{2},\\d{3})\\s\\[(?<thread>[^\\]]*)\\]\\sC:(?<correlation_id>[a-z0-9]*)\\s(?<level>[A-Z]*\\s?)\\s?T:(?<tenant>[^\\s]*)\\s?(U:(?<user_id>[^\\s]*)\\s)?P:(?<request_path>[^\\s]*)\\s?(?<location>[^\\s]*)\\s\\[(?<file_and_line>(?<file>[^\\:]*):(?<line>[^\\s]*))\\]\\s-\\s(?<message>.*(.*\\n)*)"
             }
         },
         "opid-field" : "correlation_id",
@@ -67,7 +67,7 @@
         "file-pattern" : ".*longRequests.*",
         "regex" : {
             "cplace" : {
-                "pattern" : "^(?<timestamp>\\d{4}-\\d{2}-\\d{2}\\s\\d{2}:\\d{2}:\\d{2},\\d{3})\\s\\[(?<thread>[^\\]]*)\\]\\sC:(?<correlation_id>[a-z0-9]*)\\s(?<level>[A-Z]*\\s?)\\s?T:(?<tenant>[^\\s]*)\\s?(?<user_id>[^\\s]*)\\s?-\\s[^\\:]*:\\s(?<duration>\\d*)[^\\d]*(?<cpu>[^\\s]*)[^\\/]*(?<handler>[^\\s]*)"
+                "pattern" : "^(?<timestamp>\\d{4}-\\d{2}-\\d{2}\\s\\d{2}:\\d{2}:\\d{2},\\d{3})\\s\\[(?<thread>[^\\]]*)\\]\\sC:(?<correlation_id>[a-z0-9]*)\\s(?<level>[A-Z]*\\s?)\\s?T:(?<tenant>[^\\s]*)\\s?(U:(?<user_id>[^\\s]*)\\s)?-\\s[^\\:]*:\\s(?<duration>\\d*)[^\\d]*(?<cpu>[^\\s]*)[^\\/]*(?<handler>[^\\s]*)"
             }
         },
         "level-field" : "duration",
@@ -123,7 +123,7 @@
          "multiline" : true,
          "regex" : {
             "cplace" : {
-                "pattern" : "^(?<timestamp>\\d{4}-\\d{2}-\\d{2}\\s\\d{2}:\\d{2}:\\d{2},\\d{3})\\s\\[(?<thread>[^\\]]*)\\]\\sC:(?<correlation_id>[a-z0-9]*)\\s?T:(?<tenant>[^\\s]*)\\s?(?<user_id>[^\\s]*)\\s?-\\sid=(?<id>[^,]*),\\s((?<duration>[^\\s]*)\\sms\\s\\(cpu\\s(?<cpu>[^\\s]*)\\sms\\))?(started)?\\sfor\\spath\\s(?<path>.*)"
+                "pattern" : "^(?<timestamp>\\d{4}-\\d{2}-\\d{2}\\s\\d{2}:\\d{2}:\\d{2},\\d{3})\\s\\[(?<thread>[^\\]]*)\\]\\sC:(?<correlation_id>[a-z0-9]*)\\s?T:(?<tenant>[^\\s]*)\\s?(U:(?<user_id>[^\\s]*)\\s)?-\\sid=(?<id>[^,]*),\\s((?<duration>[^\\s]*)\\sms\\s\\(cpu\\s(?<cpu>[^\\s]*)\\sms\\))?(started)?\\sfor\\spath\\s(?<path>.*)"
             }
          },
          "opid-field" : "correlation_id",
@@ -242,7 +242,7 @@
         "file-pattern" : ".*jobPerformance.*",
         "regex" : {
             "cplace" : {
-                "pattern" : "^(?<timestamp>\\d{4}-\\d{2}-\\d{2}\\s\\d{2}:\\d{2}:\\d{2},\\d{3})\\s\\[(?<thread>[^\\]]*)\\]\\sC:(?<correlation_id>[a-z0-9]*)\\s(?<level>[A-Z]*\\s?)\\s?T:(?<tenant>[^\\s]*)\\s?(?<user_id>[^\\s]*)\\s?-\\s(?<duration>\\d*)\\s\\ms([^\\(]*\\(cpu\\s(?<cpu>[^\\s]*\\sms\\)))?\\s?for\\s(?<type>[^\\s]*)\\s(?<handler>[^\\s]*)"
+                "pattern" : "^(?<timestamp>\\d{4}-\\d{2}-\\d{2}\\s\\d{2}:\\d{2}:\\d{2},\\d{3})\\s\\[(?<thread>[^\\]]*)\\]\\sC:(?<correlation_id>[a-z0-9]*)\\s(?<level>[A-Z]*\\s?)\\s?T:(?<tenant>[^\\s]*)\\s?(U:(?<user_id>[^\\s]*)\\s)?-\\s(?<duration>\\d*)\\s\\ms([^\\(]*\\(cpu\\s(?<cpu>[^\\s]*\\sms\\)))?\\s?for\\s(?<type>[^\\s]*)\\s(?<handler>[^\\s]*)"
             }
         },
         "level-field" : "duration",
@@ -308,7 +308,7 @@
         "multiline" : true,
         "regex" : {
             "cplace" : {
-                "pattern" : "^(?<timestamp>\\d{4}-\\d{2}-\\d{2}\\s\\d{2}:\\d{2}:\\d{2},\\d{3})\\s\\[(?<thread>[^\\]]*)\\]\\sC:(?<correlation_id>[a-z0-9]*)\\s(?<level>[A-Z]*\\s?)\\s?T:(?<tenant>[^\\s]*)\\s?(?<user_id>[^\\s]*)\\s?P:(?<request_path>[^\\s]*)\\s?(?<location>[^\\s]*)\\s\\[(?<file_and_line>(?<file>[^\\:]*):(?<line>[^\\s]*))\\]\\s-\\s(?<message>.*)"
+                "pattern" : "^(?<timestamp>\\d{4}-\\d{2}-\\d{2}\\s\\d{2}:\\d{2}:\\d{2},\\d{3})\\s\\[(?<thread>[^\\]]*)\\]\\sC:(?<correlation_id>[a-z0-9]*)\\s(?<level>[A-Z]*\\s?)\\s?T:(?<tenant>[^\\s]*)\\s?(U:(?<user_id>[^\\s]*)\\s)?P:(?<request_path>[^\\s]*)\\s?(?<location>[^\\s]*)\\s\\[(?<file_and_line>(?<file>[^\\:]*):(?<line>[^\\s]*))\\]\\s-\\s(?<message>.*)"
             }
         },
         "opid-field" : "correlation_id",
