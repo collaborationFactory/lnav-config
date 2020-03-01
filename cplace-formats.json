@@ -687,7 +687,7 @@
         "multiline" : true,
         "regex" : {
             "cplace" : {
-                "pattern" : "^(?<timestamp>\\d{4}-\\d{2}-\\d{2}\\s\\d{2}:\\d{2}:\\d{2},\\d{3})\\s\\[(?<thread>[^\\]]*)\\]\\sC:(?<correlation_id>[a-z0-9]*)\\s(?<level>[A-Z]*\\s?)\\s?T:(?<tenant>[^\\s]*)\\s?P:(?<request_path>[^\\s]*)\\s?(?<location>[^\\s]*)\\s\\[(?<file_and_line>(?<file>[^\\:]*):(?<line>[^\\s]*))\\]\\s-[^\\n]*(\\n(?<message1>.*(.*\\n)*)\\n(?<message2>.*(.*\\n)*))?"
+                "pattern" : "^(?<timestamp>\\d{4}-\\d{2}-\\d{2}\\s\\d{2}:\\d{2}:\\d{2},\\d{3})\\s\\[(?<thread>[^\\]]*)\\]\\sC:(?<correlation_id>[a-z0-9]*)\\s(?<level>[A-Z]*\\s?)\\s?T:(?<tenant>[^\\s]*)\\s?(U:(?<user_id>[^\\s]*)\\s)?P:(?<request_path>[^\\s]*)\\s?(?<location>[^\\s]*)\\s\\[(?<file_and_line>(?<file>[^\\:]*):(?<line>[^\\s]*))\\]\\s-[^\\n]*(\\n(?<message1>.*)(\\n(?<message2>.*))?)?"
             }
         },
         "opid-field" : "correlation_id",
@@ -716,6 +716,10 @@
                 "kind" : "string",
                 "identifier" : true
             },
+            "user_id" : {
+                "kind" : "string",
+                "identifier" : true
+            },
             "request_path" : {
                 "kind" : "string",
                 "identifier" : true
@@ -741,9 +745,14 @@
         },
         "sample" : [
             {
-                "line" : "2020-01-08 11:03:22,231 [localhost-test] C:12345 T:/cplace/local/ P:/cplace/api/cf/cplace/api cf.cplace.platform.server.LocalLog [lnav.java:11] - individual text",
+                "line" : "2019-10-24 11:44:56,902 [http-connection-832] C:al5ge4qw236lhu6fnov01w6vd INFO  T:/qa/ U:tu679pypdogoso3w51fl6dgbp-node015ya5vot1n3mhz7ctb17hqjz88 P:/qa/logFromClient c.c.p.handler.LogFromClientHandler [LogFromClientHandler.java:84] - Client reported:{\"data\":{\"message\":\"Log action Stack: \",\"numberDependencies\":2,\"numberTasks\":9,\"numberColumns\":6,\"isTaskStoreFiltered\":true,\"lastUserActions\":[\"...\",\"hideCrossLinks\",\"addTaskBelow (5)\",\"beforeedit: inlineEditing-Name (5, 3)\",\"edit: inlineEditing-Name (5, 3)\",\"indent\",\"beforeedit: inlineEditing-Name (5, 3)\",\"edit: inlineEditing-Name (5, 3)\",\"save\"],\"duration\":null},\"localDate\":\"2019-10-24T09:43:26.951Z\",\"localTimezoneOffset\":-120,\"href\":\"https:\/\/test1.collaboration-factory.de\/qa\/pages\/zdtbp8ngv1yvydp4cg179fy9t\/1-new\",\"browser\":\"Chrome77\",\"windowSize\":\"1278 x 1287\",\"screenSize\":\"2560 x 1440\",\"versionExt\":\"6.0.2.437\",\"versionGantt\":\"5.0.3\",\"clientCorrelationId\":\"1571910163481-409\",\"currentLanguage\":\"de\",\"server_sessionId\":\"node015ya5vot1n3mhz7ctb17hqjz88\",\"cplaceVersion\":\"[cplace-project-planning] 4.59_a81bbe197_2019-10-23-222511\"}",
+                "level" : "info"
+            },
+            {
+                "line" : "2019-10-31 15:14:21,869 [http-connection-1069] C:029x4x0yjpivm40hrogcs7can INFO  T:/qa/ U:3znutjiev41sbr90ry9okhb60-node01qft2npti010m1fvv16xwaoqcc3 P:/qa/logFromClient c.c.p.handler.LogFromClientHandler [LogFromClientHandler.java:84] - Client reported:\n {\"data\":{\"message\":\"Log action Stack: \",\"numberDependencies\":0,\"numberTasks\":2,\"numberColumns\":29,\"isTaskStoreFiltered\":false,\"lastUserActions\":[\"...\",\"addSubtask (1)\",\"beforeedit: inlineEditing-Name (1, 4)\",\"edit: inlineEditing-Name (1, 4)\",\"deleteTasks\",\"reloadAll\",\"reloadAll\"],\"duration\":null},\"localDate\":\"2019-10-31T14:14:20.889Z\",\"localTimezoneOffset\":-60,\"href\":\"https:\/\/test1.collaboration-factory.de\/qa\/pages\/zg1sfjbqmu81limqj442b1r38\/Abo-bearbeiten-Plan-B\",\"browser\":\"Chrome77\",\"windowSize\":\"1800 x 952\",\"screenSize\":\"1440 x 900\",\"versionExt\":\"6.0.2.437\",\"versionGantt\":\"5.0.3\",\"clientCorrelationId\":\"1572531241959-964\",\"currentLanguage\":\"de\",\"server_sessionId\":\"node01qft2npti010m1fvv16xwaoqcc3\",\"cplaceVersion\":\"[cplace-project-planning] 5.0_c8024a31e_2019-10-30-232129\"}\n {\"data\":{\"message\":\"Log action Stack: \",\"numberDependencies\":0,\"numberTasks\":2,\"numberColumns\":29,\"isTaskStoreFiltered\":false,\"lastUserActions\":[\"...\",\"addSubtask (1)\",\"beforeedit: inlineEditing-Name (1, 4)\",\"edit: inlineEditing-Name (1, 4)\",\"deleteTasks\",\"reloadAll\",\"reloadAll\",\"reloadAll\"],\"duration\":null},\"localDate\":\"2019-10-31T14:14:21.721Z\",\"localTimezoneOffset\":-60,\"href\":\"https:\/\/test1.collaboration-factory.de\/qa\/pages\/zg1sfjbqmu81limqj442b1r38\/Abo-bearbeiten-Plan-B\",\"browser\":\"Chrome77\",\"windowSize\":\"1800 x 952\",\"screenSize\":\"1440 x 900\",\"versionExt\":\"6.0.2.437\",\"versionGantt\":\"5.0.3\",\"clientCorrelationId\":\"1572531241959-964\",\"currentLanguage\":\"de\",\"server_sessionId\":\"node01qft2npti010m1fvv16xwaoqcc3\",\"cplaceVersion\":\"[cplace-project-planning] 5.0_c8024a31e_2019-10-30-232129\"}",
                 "level" : "info"
             }
+                 
         ]
     },
     "client_errors" : {
