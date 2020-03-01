@@ -571,7 +571,11 @@
         },
         "sample" : [
             {
-                "line" : "2020-01-08 11:03:22,231 [localhost-test] T:/cplace/local/ -",
+                "line" : "2020-02-26 23:07:51,804 [taskManager-5 cplace-task-315796-SavePerformanceMonitorsTask] T: - ",
+                "level" : "info"
+            },
+            {
+                "line" : "2020-02-26 22:06:00,476 [cplace-MainStatusMonitor] T: - Java heap size: Used 506 MB of 1708 MB, max 2222 MB\n2020-02-26 22:06:00,611 [cplace-MainStatusMonitor] T: - Java non-heap size: Used 296 MB of 313 MB, max 0 MB\n 2020-02-26 22:06:00,611 [cplace-MainStatusMonitor] T: - Disk space in /home/cf_test1/scripts/installer-lib/.: 126.62 GB free of 468.45 GB\n 2020-02-26 22:06:00,611 [cplace-MainStatusMonitor] T: - Running threads: 88; Peak threads: 97; Daemons: 63; Total started: 1803 ",
                 "level" : "info"
             }
         ]
