@@ -373,7 +373,7 @@
         "file-pattern" : ".*longQueries.*",
         "regex" : {
             "cplace" : {
-                "pattern" : "^(?<timestamp>\\d{4}-\\d{2}-\\d{2}\\s\\d{2}:\\d{2}:\\d{2},\\d{3})\\s\\[(?<thread>[^\\]]*)\\]\\sC:(?<correlation_id>[a-z0-9]*)\\s(?<level>[A-Z]*\\s?)\\s?T:(?<tenant>[^\\s]*)\\s?P:(?<request_path>[^\\s]*)\\s?(?<location>[^\\s]*)\\s\\[(?<file_and_line>(?<file>[^\\:]*):(?<line>[^\\s]*))\\]\\s-\\sQuery\\stook\\s(?<duration>[^\\s]*)[^\\n]*((\\n*\\s*)*Repeated:\\s*(?<repeated>[^\\s]*))?"
+                "pattern" : "^(?<timestamp>\\d{4}-\\d{2}-\\d{2}\\s\\d{2}:\\d{2}:\\d{2},\\d{3})\\s\\[(?<thread>[^\\]]*)\\]\\sC:(?<correlation_id>[a-z0-9]*)\\s(?<level>[A-Z]*\\s?)\\s?T:(?<tenant>[^\\s]*)\\s?(U:(?<user_id>[^\\s]*)\\s)?P:(?<request_path>[^\\s]*)\\s?(?<location>[^\\s]*)\\s\\[(?<file_and_line>(?<file>[^\\:]*):(?<line>[^\\s]*))\\]\\s-\\sQuery\\stook\\s(?<duration>[^\\s]*)[^\\n]*((\\n*\\s*)*Repeated:\\s*(?<repeated>[^\\s]*))?"
             }
         },
         "level-field" : "duration",
@@ -395,6 +395,10 @@
                 "identifier" : true
             },
             "tenant" : {
+                "kind" : "string",
+                "identifier" : true
+            },
+            "user_id" : {
                 "kind" : "string",
                 "identifier" : true
             },
@@ -423,7 +427,7 @@
         },
         "sample" : [
             {
-            "line" : "2020-01-08 11:03:22,231 [localhost-test] C:12345 T:/cplace/local/ P:/cplace/api/cf/cplace/api cf.cplace.platform.server.LocalLog [lnav.java:11] - Query took 1661.9 ms:\nRepeated: 145   SELECT",     
+            "line" : "2020-02-12 03:06:52,280 [init-resources-kda_dkdf] C: INFO  T:/kda_dkdf/ U: P: c.c.platform.store.LongRunningQueries [LongRunningQueries.java:111] - Query took 119.1 ms:",     
                 "level" : "info"
             }
         ]
