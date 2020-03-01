@@ -439,7 +439,7 @@
         "multiline" : true,
         "regex" : {
             "cplace" : {
-                "pattern" : "^(?<timestamp>\\d{4}-\\d{2}-\\d{2}\\s\\d{2}:\\d{2}:\\d{2},\\d{3})\\s\\[(?<thread>[^\\]]*)\\]\\sC:(?<correlation_id>[a-z0-9]*)\\s(?<level>[A-Z]*\\s?)\\s?T:(?<tenant>[^\\s]*)\\s-\\s(?<message>.*)"
+                "pattern" : "^(?<timestamp>\\d{4}-\\d{2}-\\d{2}\\s\\d{2}:\\d{2}:\\d{2},\\d{3})\\s\\[(?<thread>[^\\]]*)\\]\\sC:(?<correlation_id>[a-z0-9]*)\\s(?<level>[A-Z]*\\s?)\\s?T:(?<tenant>[^\\s]*)\\s(U:(?<user_id>[^\\s]*)\\s)?-\\s(?<message>.*)"
             }
         },
         "opid-field" : "correlation_id",
@@ -468,6 +468,10 @@
                 "kind" : "string",
                 "identifier" : true
             },
+            "user_id" : {
+                "kind" : "string",
+                "identifier" : true
+            },
             "request_path" : {
                 "kind" : "string",
                 "identifier" : true
@@ -488,7 +492,7 @@
         },
         "sample" : [
             {
-                "line" : "2020-01-08 11:03:22,231 [localhost-test] C:12345 T:/cplace/local/ - individual text",
+                "line" : "2020-02-27 11:58:21,213 [persistentJob-1 cplace-job-25-SubmitDeleteHandler$DeleteSpaceJob (tenantId qa, jobId hccohm26iuwrw3ijg1x62xt0c)] C: T:/qa/ U:vzdzhfhqerygoj2gcotk25act-dummy-session - {\"label\":\"entity.remove.pageSpace.cascadeDeleteReferences.appConfigurations\",\"total\":11,\"avg\":11.23714,\"max\":11,\"hits\":1,\"_tag\":\"longRunningJob\"}",
                 "level" : "info"
             }
         ]
