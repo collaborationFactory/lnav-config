@@ -828,7 +828,7 @@
         "multiline" : true,
         "regex" : {
             "cplace" : {
-                "pattern" : "^(?<timestamp>\\d{4}-\\d{2}-\\d{2}\\s\\d{2}:\\d{2}:\\d{2},\\d{3})\\s\\[(?<thread>[^\\]]*)\\]\\sC:(?<correlation_id>[a-z0-9]*)\\s(?<level>[A-Z]*\\s?)\\s?T:(?<tenant>[^\\s]*)\\s?P:(?<request_path>[^\\s]*)\\s?(?<location>[^\\s]*)\\s\\[(?<file_and_line>(?<file>[^\\:]*):(?<line>[^\\s]*))\\]\\s-\\s[^:]*:(?<change_event>[^\\s]*)[^:]*:(?<changed_entity_id>[^\\s]*)[^:]*:(?<changed_entity_name>.*(?=Affected))[^:]*:(?<affected_group_membership>[^\\s]*)[^:]*:(?<issuer_id>[^\\s]*)[^:]*:(?<issuer_ldap_identifier>[^\\s]*)[^:]*:(?<issuer_mail>[^\\s]*)[^:]*:(?<issuer_login>[^\\s]*)[^:]*:(?<batch_job_name>[^\\s]*)[^:]*:(?<batch_job_id>[^\\s]*)"
+                "pattern" : "^(?<timestamp>\\d{4}-\\d{2}-\\d{2}\\s\\d{2}:\\d{2}:\\d{2},\\d{3})\\s\\[(?<thread>[^\\]]*)\\]\\sC:(?<correlation_id>[a-z0-9]*)\\s(?<level>[A-Z]*\\s?)\\s?T:(?<tenant>[^\\s]*)\\s?(U:(?<user_id>[^\\s]*)\\s)?P:(?<request_path>[^\\s]*)\\s?(?<location>[^\\s]*)\\s\\[(?<file_and_line>(?<file>[^\\:]*):(?<line>[^\\s]*))\\]\\s-\\s[^:]*:(?<change_event>[^\\s]*)[^:]*:(?<changed_entity_id>[^\\s]*)[^:]*:(?<changed_entity_name>.*(?=Affected))[^:]*:(?<affected_group_membership>[^\\s]*)[^:]*:(?<issuer_id>[^\\s]*)[^:]*:(?<issuer_ldap_identifier>[^\\s]*)[^:]*:(?<issuer_mail>[^\\s]*)[^:]*:(?<issuer_login>[^\\s]*)[^:]*:(?<batch_job_name>[^\\s]*)[^:]*:(?<batch_job_id>[^\\s]*)"
             }
         },
         "opid-field" : "correlation_id",
@@ -854,6 +854,10 @@
                 "identifier" : true
             },
             "tenant" : {
+                "kind" : "string",
+                "identifier" : true
+            },
+            "user_id" : {
                 "kind" : "string",
                 "identifier" : true
             },
@@ -913,7 +917,7 @@
         },
         "sample" : [
             {
-                "line" : "2020-02-13 10:59:54,443 [thread] C: INFO  T:/cplace/tenant/ P: cf.domain [File.java:153] - ChangeEvent:disable_user  ChangedEntityId:234jakfd34   ChangedEntityName:Mustermann, Max (Abteilung) AffectedGroupMembership:    IssuerID:   IssuerLdapIdentifier:   IssuerMail: IssuerLogin:    batchJobName:cf.cplace.platform.server.ldap.LdapJob batchJobId:kadk3412k3cka",
+                "line" : "2018-12-03 13:49:05,835 [http-connection-9147] C:kasdfk343kad134 INFO  T:/basis/ U:234kjakfask1324-node01kakdfak134 P:/basis/person/submit c.c.p.a.g.PersonOrMembershipChangesLogger [PersonOrMembershipChangesLogger.java:153] - ChangeEvent:creation_of_user    ChangedEntityId:kaskdf1234   ChangedEntityName:Max Mustermann   AffectedGroupMembership:    IssuerID:akdf234134  IssuerLdapIdentifier:   IssuerMail:mustermann@collaboration-factory.de  IssuerLogin:Max Mustermann batchJobName:   batchJobId:",
                 "level" : "info"
             }
         ]
