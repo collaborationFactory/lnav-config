@@ -929,7 +929,7 @@
         "multiline" : true,
         "regex" : {
             "cplace" : {
-                "pattern" : "^(?<timestamp>\\d{4}-\\d{2}-\\d{2}\\s\\d{2}:\\d{2}:\\d{2},\\d{3})\\s\\[(?<thread>[^\\]]*)\\]\\sC:(?<correlation_id>[a-z0-9]*)\\s(?<level>[A-Z]*\\s?)\\s?T:(?<tenant>[^\\s]*)\\s?P:(?<request_path>[^\\s]*)\\s?(?<location>[^\\s]*)\\s\\[(?<file_and_line>(?<file>[^\\:]*):(?<line>[^\\s]*))\\]\\s-\\s(?<body>.*(.*\\n)*)"
+                "pattern" : "^(?<timestamp>\\d{4}-\\d{2}-\\d{2}\\s\\d{2}:\\d{2}:\\d{2},\\d{3})\\s\\[(?<thread>[^\\]]*)\\]\\sC:(?<correlation_id>[a-z0-9]*)\\s(?<level>[A-Z]*\\s?)\\s?T:(?<tenant>[^\\s]*)\\s?(U:(?<user_id>[^\\s]*)\\s)?P:(?<request_path>[^\\s]*)\\s?(?<location>[^\\s]*)\\s\\[(?<file_and_line>(?<file>[^\\:]*):(?<line>[^\\s]*))\\]\\s-\\s(?<body>.*(.*\\n)*)"
             }
         },
         "opid-field" : "correlation_id",
@@ -958,6 +958,10 @@
                 "kind" : "string",
                 "identifier" : true
             },
+            "user_id" : {
+                "kind" : "string",
+                "identifier" : true
+            },
             "request_path" : {
                 "kind" : "string",
                 "identifier" : true
@@ -974,7 +978,7 @@
         },
         "sample" : [
             {
-                "line" : "2020-01-08 11:03:22,231 [localhost-test] C:12345 T:/cplace/local/ P:/cplace/api/cf/cplace/api cf.cplace.platform.server.LocalLog [lnav.java:11] - individual text",
+                "line" : "2020-02-13 00:00:16,879 [hz._hzInstance.HealthMonitor] C: INFO  T: P: c.h.internal.diagnostics.HealthMonitor [Factory.java:65] - [22.123.28.12]:1234 [cplace-vw] [2.1.3] processors=16, physical.memory.total=62.7G, physical.memory.free=16.1G, swap.space.total=2.0G, swap.space.free=7.3G, heap.memory.used=23.2G, heap.memory.free=5.3G, heap.memory.total=23.5G, heap.memory.max=28.5G, heap.memory.used/total=81.58%, heap.memory.used/max=12.13%, minor.gc.count=8213, minor.gc.time=8238408ms, major.gc.count=1234, major.gc.time=1231346ms, load.process=0.00%, load.system=0.01%, load.systemAverage=27.00%, thread.count=231, thread.peakCount=213, cluster.timeDiff=0, event.q.size=0, executor.q.async.size=0, executor.q.client.size=0, executor.q.query.size=0, executor.q.scheduled.size=0, executor.q.io.size=0, executor.q.system.size=0, executor.q.operations.size=0, executor.q.priorityOperation.size=0, operations.completed.count=8950885, executor.q.mapLoad.size=0, executor.q.mapLoadAllKeys.size=0, executor.q.cluster.size=0, executor.q.response.size=0, operations.running.count=0, operations.pending.invocations.percentage=0.00%, operations.pending.invocations.count=1, proxy.count=0, clientEndpoint.count=0, connection.active.count=2, client.connection.count=0, connection.count=2",
                 "level" : "info"
             }
         ]
