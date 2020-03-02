@@ -990,6 +990,9 @@
         "multiline" : true,
         "regex" : {
             "cplace" : {
+                "pattern" : "^(?<timestamp>\\d{4}-\\d{2}-\\d{2}\\s\\d{2}:\\d{2}:\\d{2},\\d{3})\\s\\[(?<thread>[^\\]]*)\\]\\s(?<level>[A-Z]*\\s?)\\s?P:(?<request_path>[^\\s]*)\\s?(?<location>[^\\s]*)\\s\\[(?<file_and_line>(?<file>[^\\:]*):(?<line>[^\\s]*))\\]\\sT:(?<tenant>[^\\s]*)\\s?"
+            },
+            "customer" : {
                 "pattern" : "^(?<timestamp>\\d{4}-\\d{2}-\\d{2}\\s\\d{2}:\\d{2}:\\d{2},\\d{3})\\s\\[(?<thread>[^\\]]*)\\]\\sC:(?<correlation_id>[a-z0-9]*)\\s(?<level>[A-Z]*\\s?)\\s?T:(?<tenant>[^\\s]*)\\s?P:(?<request_path>[^\\s]*)\\s?(?<location>[^\\s]*)\\s\\[(?<file_and_line>(?<file>[^\\:]*):(?<line>[^\\s]*))\\]\\s-\\s(?<message>.*(.*\\n)*)"
             }
         },
@@ -1035,7 +1038,11 @@
         },
         "sample" : [
             {
-                "line" : "2020-01-08 11:03:22,231 [localhost-test] C:12345 T:/cplace/local/ P:/cplace/api/cf/cplace/api cf.cplace.platform.server.LocalLog [lnav.java:11] - individual text",
+                "line" : "2016-05-09 09:00:04,106 [http-connection-229] INFO  P:/basis/person/submit c.c.p.services.mail.MailSender [MailSender.java:91] T:/basis/ - mail subject: [cPlace test1] Sie wurden eingeladen, to:max.mustermann@test.com, fromAddress: null, fromName: null, isHtml: true",
+                "level" : "info"
+            },
+            {
+                "line" : "2020-02-13 04:03:28,475 [persistentJob-7 (tenantId tenant, jobId yaskdadfkbbb)] C: INFO  T:/cplace/tenant/ P: c.c.platform.services.mail.MailSender [MailSender.java:106] - mail subject: test subcject, to:max.mustermann@test.de, fromAddress: null, fromName: null, isHtml: true",
                 "level" : "info"
             }
         ]
