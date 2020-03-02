@@ -763,6 +763,9 @@
         "regex" : {
             "cplace" : {
                 "pattern" : "^(?<timestamp>\\d{4}-\\d{2}-\\d{2}\\s\\d{2}:\\d{2}:\\d{2},\\d{3})\\s\\[(?<thread>[^\\]]*)\\]\\sC:(?<correlation_id>[a-z0-9]*)\\s(?<level>[A-Z]*\\s?)\\s?T:(?<tenant>[^\\s]*)\\s?(U:(?<user_id>[^\\s]*)\\s)?P:(?<request_path>[^\\s]*)\\s?(?<location>[^\\s]*)\\s\\[(?<file_and_line>(?<file>[^\\:]*):(?<line>[^\\s]*))\\]\\s-[^\\n]*(\\n.*?errorMsg=(?<type>[^\\n]*))?"
+            },
+            "cplace_old" : {
+                "pattern" : "^(?<timestamp>\\d{4}-\\d{2}-\\d{2}\\s\\d{2}:\\d{2}:\\d{2},\\d{3})\\s\\[(?<thread>[^\\]]*)\\]\\sT:(?<tenant>[^\\s]*)\\s?"
             }
         },
         "opid-field" : "correlation_id",
@@ -817,6 +820,10 @@
             {
                 "line" : "2020-01-30 16:23:11,286 [http-connection-1328] C:askdfak34132 ERROR T:/qa/ U:-node01akdfkjf3132adf P:/qa/logClientErrors c.c.p.handler.LogClientErrorsHandler [LogClientErrorsHandler.java:65] - Client reported an error:\n errorMsg=Bezeichner erwartet",
                 "level" : "error"
+            },
+            {
+                "line" : "2016-07-10 23:14:05,960 [http-connection-9444] T:/basis/ - Client reported an error:",
+                "level" : "info"
             }
         ]
     },
