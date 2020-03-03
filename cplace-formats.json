@@ -376,6 +376,7 @@
                 "pattern" : "^(?<timestamp>\\d{4}-\\d{2}-\\d{2}\\s\\d{2}:\\d{2}:\\d{2},\\d{3})\\s\\[(?<thread>[^\\]]*)\\]\\sC:(?<correlation_id>[a-z0-9]*)\\s(?<level>[A-Z]*\\s?)\\s?T:(?<tenant>[^\\s]*)\\s?(U:(?<user_id>[^\\s]*)\\s)?P:(?<request_path>[^\\s]*)\\s?(?<location>[^\\s]*)\\s\\[(?<file_and_line>(?<file>[^\\:]*):(?<line>[^\\s]*))\\]\\s-\\sQuery\\stook\\s(?<duration>[^\\s]*)[^\\n]*((\\n*\\s*)*Repeated:\\s*(?<repeated>[^\\s]*))?"
             }
         },
+        "opid-field" : "correlation_id",
         "level-field" : "duration",
         "level" : {
             "warning" : "[3-9][0-9]{5,}"
